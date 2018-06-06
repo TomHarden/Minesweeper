@@ -34,15 +34,23 @@ namespace Minesweeper
         {
             MineFieldTile_View b = (MineFieldTile_View)sender;
             b.model.setToSwept();
-            if (b.model.tileHasMine())
+            b.Refresh();
+        }
+        public override void Refresh()
+        {
+            base.Refresh();
+            if (this.model.tileHasBeenSwept())
             {
-                b.Text = "BOOM";
+                if (this.model.tileHasMine())
+                {
+                    this.Text = "BOOM";
+                }
+                else
+                {
+                    this.Text = "" + this.model.getNumSurroundingMines();
+                }
             }
-            else
-            {
-                b.Text = "" + b.model.getNumSurroundingMines();
-            }
-            //b.model.updateParent();
+            parent_view.Refresh();
         }
     }
 }

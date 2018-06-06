@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MinefieldPanel = new Minefield_View(new Minefield_Model(3, 3, 1));
+            this.MinefieldPanel = new Minefield_View(session.getCurrentGame().getMinefield_Model(), this);
             this.SuspendLayout();
             // 
             // flowLayoutPanel1

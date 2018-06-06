@@ -51,15 +51,17 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Minefield.cs" />
+    <Compile Include="GameRecord_Model.cs" />
     <Compile Include="MineFieldTile_Model.cs" />
     <Compile Include="MineFieldTile_View.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Minesweeper_Game.cs" />
     <Compile Include="Minefield_Model.cs" />
     <Compile Include="Minefield_View.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PlayerSession_Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
