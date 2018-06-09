@@ -97,6 +97,7 @@ namespace Minesweeper
             }
             return surroundingMines;
         }
+        
         public int totalSweptTiles()
         {
             int total = 0;

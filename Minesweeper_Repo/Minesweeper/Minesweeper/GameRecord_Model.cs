@@ -16,7 +16,7 @@ namespace Minesweeper
             game = inGame;
         }
         public void record( MineFieldTile_Model affectedTile,//the tile that the user clicked
-                            Minefield_Tile_Event action//what the user did to the tile:  swept, buried, or questioned
+                            Minefield_Tile_Event action//what the user did to the tile:  swept, flagged, or questioned
                             )
         {
             allSweepRecords.Add(new SweepRecord(affectedTile, action));
@@ -41,5 +41,5 @@ namespace Minesweeper
             return action;
         }
     }
-    public enum Minefield_Tile_Event { SWEEP, BURY, QUESTION };
+    public enum Minefield_Tile_Event { SWEEP_MANUAL, SWEEP_AUTO, FLAG, QUESTION };
 }

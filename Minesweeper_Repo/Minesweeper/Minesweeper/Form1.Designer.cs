@@ -1,6 +1,6 @@
 ﻿namespace Minesweeper
 {
-    partial class Form1
+    /*partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -55,6 +55,6 @@
         #endregion
 
         private Minefield_View MinefieldPanel;
-    }
+    }*/
 }
 

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Minesweeper
 {
-    class Minefield_View : FlowLayoutPanel
+    public class Minefield_View : FlowLayoutPanel
     {
         Minefield_Model model;
         MineFieldTile_View[][] field;//extends button
@@ -37,6 +37,38 @@ namespace Minesweeper
         {
             base.Refresh();
             parent_view.Refresh();
+        }
+        public List<MineFieldTile_View> getNeighboringTiles(MineFieldTile_View origin)
+        {
+            return getNeighboringTiles(origin.getModel().getYPos(), origin.getModel().getXPos());
+        }
+        public List<MineFieldTile_View> getNeighboringTiles(int y, int x)
+        {
+            List<MineFieldTile_View> neighbors = new List<MineFieldTile_View>();
+            for (int i = y - 1; i <= y + 1; i++)
+            {
+                for (int j = x - 1; j <= x + 1; j++)
+                {
+                    try
+                    {
+                        if (i != y || j != x)
+                            neighbors.Add(field[i][j]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+            return neighbors;
+        }
+        public void autoSweep(MineFieldTile_View origin)
+        {
+            foreach (MineFieldTile_View mftv in this.getNeighboringTiles(origin))
+            {
+                if (!mftv.getModel().tileHasBeenSwept())
+                    mftv.sweep(false);
+            }
         }
     }
 }

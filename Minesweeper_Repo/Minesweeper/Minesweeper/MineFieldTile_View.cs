@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace Minesweeper
 {
-    class MineFieldTile_View : Button
+    public class MineFieldTile_View : Button
     {
-        public const int TILE_WIDTH = 50;//pixels
-        public const int TILE_HEIGHT = 50;//pixels
+        public const int TILE_WIDTH = 80;//pixels
+        public const int TILE_HEIGHT = 80;//pixels
 
         protected MineFieldTile_Model model;
         protected Minefield_View parent_view;
@@ -21,36 +21,61 @@ namespace Minesweeper
             parent_view = inParent_view;
             this.Width = TILE_WIDTH;
             this.Height = TILE_HEIGHT;
-            this.Click += this.Btn_Click;
-
-            //Test Code - start
-            /*if (this.model.tileHasMine())
+            
+            this.MouseUp += this.Btn_Click;//only handles mouse clicks.  Must use Mouse Up to be compatible with right clicking
+            /* //Test Code - start
+            if (this.model.tileHasMine())
             {
                 this.BackColor = System.Drawing.Color.Azure;
-            }*/
-            // Test Code - end
+            }
+            */ // Test Code - end
         }
-        protected void Btn_Click(Object sender, EventArgs e)
+        protected void Btn_Click(Object sender, MouseEventArgs e)
         {
-            MineFieldTile_View b = (MineFieldTile_View)sender;
-            b.model.setToSwept();
-            b.Refresh();
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    ((MineFieldTile_View)sender).sweep(true);
+                    break;
+                case MouseButtons.Right:
+                    ((MineFieldTile_View)sender).flag();
+                    break;
+            }
+        }
+
+        public MineFieldTile_Model getModel()
+        {
+            return model;
         }
         public override void Refresh()
         {
-            base.Refresh();
             if (this.model.tileHasBeenSwept())
             {
                 if (this.model.tileHasMine())
                 {
                     this.Text = "BOOM";
                 }
-                else
+                else if (this.model.getNumSurroundingMines() > 0)
                 {
                     this.Text = "" + this.model.getNumSurroundingMines();
                 }
             }
+            base.Refresh();
             parent_view.Refresh();
+        }
+        public void sweep(bool manualSweep = true)
+        {
+            this.model.setToSwept();
+            this.Enabled = false;
+            if (this.model.getNumSurroundingMines() == 0)
+                this.parent_view.autoSweep(this);
+            this.Refresh();
+        }
+        public void flag()
+        {
+            this.Text = "FLAG";
+            this.ForeColor = System.Drawing.Color.Red;
+            this.Refresh();
         }
     }
 }

@@ -13,11 +13,11 @@ namespace Minesweeper
         protected bool hasMine = false;
         protected bool hasBeenSwept = false;
 
-        public MineFieldTile_Model(Minefield_Model inParent_field, int inXPos, int inYPos, bool inHasMine = false)
+        public MineFieldTile_Model(Minefield_Model inParent_field, int inYPos, int inXPos, bool inHasMine = false)
         {
             parent_field = inParent_field;
-            xPos = inXPos;
             yPos = inYPos;
+            xPos = inXPos;
             hasMine = inHasMine;
         }
 
@@ -39,7 +39,7 @@ namespace Minesweeper
         }
         public int getNumSurroundingMines()
         {
-            return this.parent_field.getNumSurroundingMines(this.xPos, this.yPos);
+            return this.parent_field.getNumSurroundingMines(this.yPos, this.xPos);
         }
         public void setToSwept()
         {

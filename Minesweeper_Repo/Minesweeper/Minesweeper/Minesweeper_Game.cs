@@ -16,7 +16,7 @@ namespace Minesweeper
         public Minesweeper_Game(PlayerSession_Model inParentSession)
         {
             parentSession = inParentSession;
-            game = new Minefield_Model(4, 4, 1);//test+_+
+            game = new Minefield_Model(10, 10, 10);//test+_+
             gameRecord = new GameRecord_Model(this);
         }
         public Minefield_Model getMinefield_Model()
